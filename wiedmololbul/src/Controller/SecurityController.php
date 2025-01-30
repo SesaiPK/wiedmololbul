@@ -74,26 +74,26 @@ class SecurityController extends AbstractController
 
             // Sprawdzenie czy pola są uzupełnione
             if (!$email || !$password || !$confirmedPassword) {
-                $this->addFlash('error', 'Wszystkie pola są wymagane.');
+                $this->addFlash('error', 'All fields are required');
                 return $this->redirectToRoute('app_register');
             }
 
             // Sprawdzenie, czy e-mail jest poprawny
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $this->addFlash('error', 'Niepoprawny format e-maila.');
+                $this->addFlash('error', 'Wrong email format');
                 return $this->redirectToRoute('app_register');
             }
 
             // Sprawdzenie, czy hasła się zgadzają
             if ($password !== $confirmedPassword) {
-                $this->addFlash('error', 'Hasła nie są identyczne.');
+                $this->addFlash('error', 'Passwords do not match.');
                 return $this->redirectToRoute('app_register');
             }
 
             // Sprawdzenie, czy użytkownik już istnieje
             $existingUser = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
             if ($existingUser) {
-                $this->addFlash('error', 'Użytkownik z tym adresem email już istnieje.');
+                $this->addFlash('error', 'User with this email already exists.');
                 return $this->redirectToRoute('app_register');
             }
 
@@ -106,7 +106,7 @@ class SecurityController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Konto zostało utworzone. Możesz się zalogować.');
+            $this->addFlash('success', 'Account created.');
             return $this->redirectToRoute('app_login');
         }
 
@@ -156,7 +156,7 @@ class SecurityController extends AbstractController
         $newPassword = $request->request->get('new_password');
 
         if (!$passwordHasher->isPasswordValid($user, $currentPassword)) {
-            $this->addFlash('error', 'Nieprawidłowe hasło');
+            $this->addFlash('error', 'Wrong current password.');
             return $this->redirectToRoute('app_profile');
         }
 
@@ -164,7 +164,7 @@ class SecurityController extends AbstractController
         $user->setPassword($hashedPassword);
         $entityManager->flush();
 
-        $this->addFlash('success', 'Hasło zostało zmienione');
+        $this->addFlash('success', 'Password changed.');
         return $this->redirectToRoute('app_profile');
     }
 

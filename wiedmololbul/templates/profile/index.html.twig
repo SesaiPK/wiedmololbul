@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Profil użytkownika - Wiedmolol{% endblock %}
+{% block title %}User Profile - Wiedmolol{% endblock %}
 
 {% block content %}
     <div class="container">
         <div class="profile-box">
-            <h1>Profil użytkownika</h1>
+            <h1>User Profile</h1>
             <div class="user-info">
                 <p><strong>Email:</strong> {{ user.email }}</p>
             </div>
@@ -15,16 +15,16 @@
                         <button type="submit">Admin Panel</button>
                     </form>
                 {% endif %}
-                <form action="{{ path('app_logout') }}" method="post">
-                    <button type="submit">Wyloguj</button>
-                </form>
                 <form action="{{ path('app_change_password') }}" method="post">
-                    <input type="password" name="current_password" placeholder="Obecne hasło">
-                    <input type="password" name="new_password" placeholder="Nowe hasło">
-                    <button type="submit">Zmień hasło</button>
+                    <input type="password" name="current_password" placeholder="Current password">
+                    <input type="password" name="new_password" placeholder="New password">
+                    <button type="submit">Change password</button>
+                </form>
+                <form action="{{ path('app_logout') }}" method="post">
+                    <button type="submit">Logout</button>
                 </form>
                 <form action="{{ path('app_delete_account') }}" method="post">
-                    <button type="submit">Usuń konto</button>
+                    <button type="submit">Delete account</button>
                 </form>
             </div>
         </div>

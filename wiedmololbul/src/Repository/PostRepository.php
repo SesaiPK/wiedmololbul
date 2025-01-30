@@ -27,10 +27,10 @@ class PostRepository extends ServiceEntityRepository
     public function searchPosts(string $query): array
     {
         return $this->createQueryBuilder('p')
-            ->where('p.name LIKE :query')
-            ->orWhere('p.content LIKE :query')
-            ->orWhere('p.author LIKE :query')
-            ->setParameter('query', '%' . $query . '%')
+            ->where('LOWER(p.name) LIKE LOWER(:query)')
+            ->orWhere('LOWER(p.content) LIKE LOWER(:query)')
+            ->orWhere('LOWER(p.author) LIKE LOWER(:query)')
+            ->setParameter('query', '%' . strtolower($query) . '%')
             ->orderBy('p.id', 'DESC')
             ->getQuery()
             ->getResult();

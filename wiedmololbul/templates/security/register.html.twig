@@ -1,6 +1,6 @@
 {% extends 'security/auth_base.html.twig' %}
 
-{% block title %}Rejestracja - Wiedmolol{% endblock %}
+{% block title %}Register - Wiedmolol{% endblock %}
 
 {% block content %}
     <div class="container">
@@ -13,17 +13,17 @@
             {% endfor %}
 
             <input type="email" id="email" name="email" placeholder="E-mail" required>
-            <input type="password" id="password" name="password" placeholder="Hasło" required>
-            <input type="password" id="confirmedPassword" name="confirmedPassword" placeholder="Potwierdź hasło" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <input type="password" id="confirmedPassword" name="confirmedPassword" placeholder="Confirm Password" required>
 
-            <button type="submit" name="logIn">Zarejestruj się</button>
+            <button type="submit" name="logIn">Sign Up</button>
         </form>
     </div>
 
     <div class="signup-bar">
-        <p>Masz już konto?</p>
+        <p>Already have an account?</p>
         <a href="{{ path('app_login') }}">
-            <button name="signUp">Zaloguj się</button>
+            <button name="signUp">Log In</button>
         </a>
     </div>
     <script src="{{ asset('js/script.js') }}"></script>
