@@ -20,7 +20,7 @@ class SecurityController extends AbstractController
         dd($this->getUser()); // Powinien zwrócić encję User, jeśli logowanie działa
     }
 
-    #[Route(path: '/security/login', name: 'app_login')]
+    #[Route(path: '/security/login', name: 'app_login', methods: ['POST','GET'])]
     /**
      * Logowanie użytkownika.
      *
@@ -64,7 +64,10 @@ class SecurityController extends AbstractController
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
-    #[Route('/security/register', name: 'app_register')]
+    #[Route('/security/register', name: 'app_register', methods: ['POST','GET'])]
+    /**
+     * Rejestracja użytkownika.
+     */
     public function register(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
     {
         if ($request->isMethod('POST')) {
@@ -169,6 +172,9 @@ class SecurityController extends AbstractController
     }
 
     #[Route('/security/delete-account', name: 'app_delete_account', methods: ['POST'])]
+    /**
+     * Usuwanie użytkownika
+     */
     #[IsGranted("ROLE_USER")]
     public function deleteAccount(EntityManagerInterface $entityManager, Request $request): Response
     {
