@@ -34,8 +34,8 @@
         <div class="create-content">
             <h1>Upload</h1>
             {{ form_start(postForm, { 'attr': {'class': 'create-post-form'} }) }}
-            {{ form_row(postForm.name, {'attr': {'class': 'form-input title-input', 'placeholder': 'Title'}}) }}
-            {{ form_row(postForm.content, {'attr': {'class': 'form-input content-input', 'rows': '10', 'placeholder': 'Content'}}) }}
+            {{ form_widget(postForm.name, {'attr': {'class': 'form-input title-input', 'placeholder': 'Title'}}) }}
+            {{ form_widget(postForm.content, {'attr': {'class': 'form-input content-input', 'rows': '10', 'placeholder': 'Content'}}) }}
             <button type="submit" class="submit-button">Submit</button>
             {{ form_end(postForm) }}
         </div>
