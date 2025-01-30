@@ -16,15 +16,25 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
+    public function findAllPosts(): array
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 
-        public function findAllPosts(): array
-        {
-            return $this->createQueryBuilder('p')
-                ->orderBy('p.id', 'DESC')
-                ->getQuery()
-                ->getResult()
-            ;
-        }
+    public function searchPosts(string $query): array
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.name LIKE :query')
+            ->orWhere('p.content LIKE :query')
+            ->orWhere('p.author LIKE :query')
+            ->setParameter('query', '%' . $query . '%')
+            ->orderBy('p.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 
     //    public function findOneBySomeField($value): ?Project
     //    {
