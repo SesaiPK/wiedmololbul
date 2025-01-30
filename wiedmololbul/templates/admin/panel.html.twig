@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panel Administratora - Wiedmolol{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="admin-panel">
+            <h1>Panel Administratora</h1>
+
+            <div class="admin-actions">
+                <h2>Lista użytkowników</h2>
+                <ul class="list">
+                    {% if users is empty %}
+                        <p>Brak użytkowników.</p>
+                    {% else %}
+                        {% for user in users %}
+                            <li>
+                                <strong>Email:</strong> {{ user.email }}
+
+                                {% if 'ROLE_ADMIN' not in user.roles %}
+                                    <form action="{{ path('admin_delete_user', {'id': user.id}) }}" method="post">
+                                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('delete_user') }}">
+                                        <button type="submit" class="delete-button">Usuń</button>
+                                    </form>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
