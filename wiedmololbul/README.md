@@ -68,6 +68,8 @@ The application utilizes a PostgresSQL database with tables designed for users a
 
 ## Screenshots
 
+![SWAGGER](screenshots/swagger.png "SWAGGER")
+
 Below are screenshots from various parts of the Wiedmolol application, showcasing the interface for desktop and mobile
 devices:
 
