@@ -9,9 +9,13 @@
                 <p class="error-message">{{ message }}</p>
             {% endfor %}
 
-            <input type="email" id="email" name="_username" placeholder="E-mail" required>
+            <input type="email" id="email" name="_username" placeholder="E-mail" required autofocus value="{{ last_username }}">
             <input type="password" id="password" name="_password" placeholder="Hasło" required>
-
+            <input
+                    type="hidden"
+                    name="_csrf_token"
+                    value="{{ csrf_token('authenticate') }}"
+            />
             <button type="submit" name="logIn">Zaloguj się</button>
         </form>
     </div>

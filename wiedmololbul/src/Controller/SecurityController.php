@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class SecurityController extends AbstractController
 {
@@ -18,18 +19,42 @@ class SecurityController extends AbstractController
     {
         dd($this->getUser()); // Powinien zwrócić encję User, jeśli logowanie działa
     }
-    #[Route(path: '/login', name: 'app_login')]
+
+    #[Route(path: '/security/login', name: 'app_login')]
+    /**
+     * Logowanie użytkownika.
+     *
+     * @OA\Post(
+     *     path="/login",
+     *     summary="Logowanie użytkownika",
+     *     tags={"Authentication"},
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(
+     *             required={"email", "password"},
+     *             @OA\Property(property="email", type="string", format="email", example="user@example.com"),
+     *             @OA\Property(property="password", type="string", example="password123")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Zalogowano pomyślnie."
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Nieprawidłowe dane logowania."
+     *     )
+     * )
+     */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-         if ($this->getUser()) {
-             return $this->redirectToRoute('homepage');
-         }
+        if ($this->getUser()) {
+            return $this->redirectToRoute('homepage');
+        }
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
-
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
@@ -39,7 +64,7 @@ class SecurityController extends AbstractController
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
-    #[Route('/register', name: 'app_register')]
+    #[Route('/security/register', name: 'app_register')]
     public function register(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
     {
         if ($request->isMethod('POST')) {
@@ -77,7 +102,7 @@ class SecurityController extends AbstractController
             $user->setPassword(
                 $passwordHasher->hashPassword($user, $password)
             );
-
+            $user->setRoles(['ROLE_USER']);
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -86,6 +111,75 @@ class SecurityController extends AbstractController
         }
 
         return $this->render('security/register.html.twig');
+    }
+
+    #[Route('/security/change-password', name: 'app_change_password', methods: ['POST'])]
+    #[IsGranted("ROLE_USER")]
+    /**
+     * Zmiana hasła użytkownika.
+     *
+     * @OA\Patch(
+     *     path="/security/change-password",
+     *     summary="Zmiana hasła użytkownika",
+     *     tags={"Authentication"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"current_password", "new_password"},
+     *             @OA\Property(property="current_password", type="string", example="oldPassword123"),
+     *             @OA\Property(property="new_password", type="string", example="newSecurePassword456")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Hasło zostało zmienione."
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Nieprawidłowe hasło."
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Nieautoryzowany dostęp."
+     *     )
+     * )
+     */
+    public function changePassword(
+        Request                     $request,
+        UserPasswordHasherInterface $passwordHasher,
+        EntityManagerInterface      $entityManager
+    ): Response
+    {
+        $user = $this->getUser();
+
+        $currentPassword = $request->request->get('current_password');
+        $newPassword = $request->request->get('new_password');
+
+        if (!$passwordHasher->isPasswordValid($user, $currentPassword)) {
+            $this->addFlash('error', 'Nieprawidłowe hasło');
+            return $this->redirectToRoute('app_profile');
+        }
+
+        $hashedPassword = $passwordHasher->hashPassword($user, $newPassword);
+        $user->setPassword($hashedPassword);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Hasło zostało zmienione');
+        return $this->redirectToRoute('app_profile');
+    }
+
+    #[Route('/security/delete-account', name: 'app_delete_account', methods: ['POST'])]
+    #[IsGranted("ROLE_USER")]
+    public function deleteAccount(EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $user = $this->getUser();
+        $request->getSession()->invalidate(); // Usunięcie sesji
+        $this->container->get('security.token_storage')->setToken(null); // Wyczyszczenie tokenu użytkownika
+
+        $entityManager->remove($user);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('homepage');
     }
 
 }

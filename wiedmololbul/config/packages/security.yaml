@@ -16,20 +16,19 @@ security:
 
       main:
         provider: app_user_provider
-
-        # Standardowy formularz logowania
         form_login:
           login_path: app_login
           check_path: app_login
           enable_csrf: true
           default_target_path: /homepage
-
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#the-firewall
-
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
-
+        logout:
+          path: app_logout
+          target: /homepage
+        lazy: true
+        remember_me:
+          secret: '%kernel.secret%'
+          lifetime: 604800 # 1 tydzień
+          path: /
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
