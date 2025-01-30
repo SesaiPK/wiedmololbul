@@ -1,17 +1,28 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Wiedmolol{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('css/homepage.css') }}">
+    <script type="text/javascript" src="{{ asset('js/search.js') }}" defer></script>
+    <link rel="icon" href="{{ asset('img/logo.svg') }}" type="image/svg+xml">
+</head>
+<body>
+<header>
+    <div class="header-left">
+        <a href="{{ path('homepage') }}"><img src="{{ asset('img/logo.svg') }}" alt="Logo" class="logo"></a>
+        <h1 class="site-name">Wiedmolol</h1>
+    </div>
+    <div class="header-right">
+        <input type="text" id="search-bar" class="search-bar" placeholder="Search...">
+        <a><img src="{{ asset('img/profile.svg') }}" alt="Profile" class="icon icon-profile"></a>
+    </div>
+</header>
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+<div class="main-container">
+    {% block content %}{% endblock %}
+</div>
+
+</body>
 </html>

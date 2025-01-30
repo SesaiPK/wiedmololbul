@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home - Wiedmolol{% endblock %}
+
+{% block content %}
+    <section class="content">
+        <div class="box popular">
+            <h2>Popular</h2>
+            <div class="popular-item">
+                <a href="{{ path('article_show', {'slug': 'geraltofrivia'}) }}">
+                    <img src="{{ asset('img/geraltofrivia.svg') }}" alt="Geralt of Rivia" class="popular-img">
+                </a>
+                <a class="popular-text">Geralt of Rivia</a>
+            </div>
+            <div class="popular-item">
+                <a href="{{ path('article_show', {'slug': 'yenneferofvengerberg'}) }}">
+                    <img src="{{ asset('img/yenneferofvengerberg.svg') }}" alt="Yennefer of Vengerberg" class="popular-img">
+                </a>
+                <a class="popular-text">Yennefer of Vengerberg</a>
+            </div>
+            <div class="popular-item">
+                <a href="{{ path('article_show', {'slug': 'gaunterodimm'}) }}">
+                    <img src="{{ asset('img/gaunterodimm.svg') }}" alt="Gaunter O'Dimm" class="popular-img">
+                </a>
+                <a class="popular-text">Gaunter O'Dimm</a>
+
+            </div>
+            <div class="popular-item">
+                <a href="{{ path('article_show', {'slug': 'emhyrvaremreis'}) }}">
+                    <img src="{{ asset('img/emhyrvaremreis.svg') }}" alt="Emhyr var Emreis" class="popular-img">
+                </a>
+                <a class="popular-text">Emhyr var Emreis</a>
+            </div>
+        </div>
+
+        <div class="box community">
+            <h2>Community</h2>
+            <a class="create-post-button">Create Post</a>
+            <section class="posts">
+                {% if posts is not empty %}
+                    {% for post in posts %}
+                        <div class="post">
+                            <h3>{{ post.name }}</h3>
+                            <p class="author"><strong>By: </strong>{{ post.author }}</p>
+                            <p class="content">{{ post.content }}</p>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No posts available.</p>
+                {% endif %}
+            </section>
+        </div>
+    </section>
+{% endblock %}

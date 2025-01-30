@@ -28,7 +28,7 @@ services:
     volumes:
       - database_data:/var/lib/postgresql/data:rw
     ports:
-      - "5432:5432"
+      - "5433:5432"
 
   mailer:
     image: axllent/mailpit

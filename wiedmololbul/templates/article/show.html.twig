@@ -1,12 +1,34 @@
-{# templates/article/show.html.twig #}
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ article.title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ article.title }} | Wiedmolol</title>
+    <link rel="stylesheet" href="{{ asset('css/geraltofrivia.css') }}">
+    <link rel="icon" href="{{ asset('img/logo.svg') }}" type="image/svg+xml">
 </head>
 <body>
-<h1>{{ article.title }}</h1>
-<p>{{ article.content }}</p>
+<header>
+    <div class="header-left">
+        <a href="{{ path('homepage') }}"><img src="{{ asset('img/logo.svg') }}" alt="Logo" class="logo"></a>
+        <h1 class="site-name">Wiedmolol</h1>
+    </div>
+    <div class="header-right">
+        <input type="text" id="search-bar" class="search-bar" placeholder="Search...">
+        <a><img src="{{ asset('img/profile.svg') }}" alt="Profile" class="icon icon-profile"></a>
+    </div>
+</header>
+
+<div class="main-container">
+    <section class="content">
+        <div class="character-profile">
+            <img src="{{ asset('img/' ~ article.name ~ '.svg') }}" alt="{{ article.title }}" class="character-img">
+            <div class="character-info">
+                <h2>{{ article.title }}</h2>
+                <p>{{ article.content|raw }}</p>
+            </div>
+        </div>
+    </section>
+</div>
 </body>
 </html>
