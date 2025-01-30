@@ -1,0 +1,363 @@
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: url('/img/bathtubgeralt.svg') no-repeat center center fixed;
+    background-size: cover;
+    color: #ffffff;
+}
+
+.main-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+header {
+    width: 100%;
+    height: 75px;
+    background-color: #2B2B2B;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 50px;
+    margin-right: 10px;
+}
+
+.site-name {
+    color: #d9d9d9;
+    font-size: 24px;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar {
+    height: 20px;
+    padding: 5px 10px;
+    font-size: 16px;
+    background-color: #1a1a1a;
+    border: none;
+    border-radius: 15px;
+    color: #b3b3b3;
+}
+
+.search-bar:focus {
+    outline: none;
+}
+
+.icon {
+    height: 30px;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.icon-profile {
+    height: 40px;
+}
+
+.content {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.box {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    color: #000000;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.popular {
+    width: 250px;
+    margin-right: 10px;
+}
+
+.community {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.explore {
+    width: 250px;
+    margin-left: 10px;
+}
+
+.popular-item {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.popular-img {
+    display: block;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.popular-img:hover {
+    transform: scale(1.05);
+}
+
+.popular-text {
+    display: block;
+    margin-top: 10px;
+    color: #222222;
+    font-size: 16px;
+    text-decoration: none;
+    transition: color 0.2s;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.popular-text:hover {
+    color: #555555;
+}
+
+.post {
+    background: rgba(50, 50, 50, 0.8);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #ffffff;
+}
+
+.post h3 {
+    margin-top: 0;
+}
+
+.post p {
+    margin: 5px 0;
+}
+
+.explore-item {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.explore-img {
+    display: block;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.explore-img:hover {
+    transform: scale(1.05);
+}
+
+.create-post-button {
+    display: inline-block;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    background-color: #662626;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.create-post-button:hover {
+    background-color: #b48484;
+}
+
+
+.container {
+    width: 80%;
+    margin: auto;
+    padding-top: 20px;
+}
+
+.profile-box {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    color: #000000;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.profile-box h1 {
+    margin-bottom: 20px;
+}
+
+.user-info p {
+    margin: 5px 0 20px;
+}
+
+.profile-actions form {
+    margin-bottom: 15px;
+}
+
+.profile-actions input[type="password"],
+.profile-actions button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 0 auto 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.profile-actions button {
+
+    background-color: #662626;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.profile-actions button:hover {
+    background-color: #b48484;
+}
+
+.admin-panel {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    color: #000000;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.admin-panel h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.admin-panel .section {
+    margin-bottom: 30px;
+}
+
+.admin-panel .section h2 {
+    margin-bottom: 10px;
+}
+
+.admin-panel .list {
+    list-style: none;
+    padding: 0;
+}
+
+.admin-panel .list li {
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-panel .list li form {
+    display: inline;
+}
+
+.admin-panel .list li button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.profile-actions button,
+.delete-button {
+    background-color: #662626;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.profile-actions button:hover,
+.delete-button:hover {
+    background-color: #b48484;
+}
+
+@media (max-width: 768px) {
+
+    .search-bar {
+        width: 50px;
+    }
+
+
+    .content {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .popular {
+        display: none;
+    }
+
+    .community, .explore {
+        width: 100%;
+        margin: 0;
+    }
+
+    .box, .profile-box, .admin-panel {
+        width: auto;
+        margin: 10px 0;
+    }
+
+    .popular-item, .explore-item {
+        margin-bottom: 10px;
+    }
+
+    .profile-actions input[type="password"],
+    .profile-actions button {
+        width: 100%;
+        padding: 10px;
+        margin: 0 auto 10px;
+        box-sizing: border-box;
+    }
+
+    .admin-panel .list li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .admin-panel .list li form {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .admin-panel .list li button {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .admin-panel .section {
+        margin-bottom: 20px;
+    }
+}
