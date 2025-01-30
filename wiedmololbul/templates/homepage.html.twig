@@ -35,7 +35,9 @@
 
         <div class="box community">
             <h2>Community</h2>
-            <a class="create-post-button">Create Post</a>
+            {% if app.user %}
+                <a href="{{ path('post_create') }}" class="create-post-button">Dodaj Post</a>
+            {% endif %}
             <section class="posts">
                 {% if posts is not empty %}
                     {% for post in posts %}
@@ -46,7 +48,7 @@
                         </div>
                     {% endfor %}
                 {% else %}
-                    <p>No posts available.</p>
+                    <p>Brak postów do wyświetlenia.</p>
                 {% endif %}
             </section>
         </div>

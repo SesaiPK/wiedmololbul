@@ -15,8 +15,18 @@
         <h1 class="site-name">Wiedmolol</h1>
     </div>
     <div class="header-right">
-        <input type="text" id="search-bar" class="search-bar" placeholder="Search...">
-        <a><img src="{{ asset('img/profile.svg') }}" alt="Profile" class="icon icon-profile"></a>
+        <form id="search-form" action="{{ path('homepage') }}" method="get">
+            <input type="text" id="search-bar" name="search" class="search-bar" placeholder="Search..." value="{{ query is defined ? query : '' }}">
+        </form>
+        {% if app.user %}
+            <a href="{{ path('app_profile') }}">
+                <img src="{{ asset('img/profile.svg') }}" alt="Profile" class="icon icon-profile">
+            </a>
+        {% else %}
+            <a href="{{ path('app_login') }}">
+                <img src="{{ asset('img/profile.svg') }}" alt="Zaloguj się" class="icon icon-profile">
+            </a>
+        {% endif %}
     </div>
 </header>
 
