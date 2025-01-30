@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil użytkownika - Wiedmolol{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="profile-box">
+            <h1>Profil użytkownika</h1>
+            <div class="user-info">
+                <p><strong>Email:</strong> {{ user.email }}</p>
+            </div>
+            <div class="profile-actions">
+                {% if 'ROLE_ADMIN' in app.user.roles %}
+                    <form action="{{ path('admin_panel') }}" method="get">
+                        <button type="submit">Admin Panel</button>
+                    </form>
+                {% endif %}
+                <form action="{{ path('app_logout') }}" method="post">
+                    <button type="submit">Wyloguj</button>
+                </form>
+                <form action="{{ path('app_change_password') }}" method="post">
+                    <input type="password" name="current_password" placeholder="Obecne hasło">
+                    <input type="password" name="new_password" placeholder="Nowe hasło">
+                    <button type="submit">Zmień hasło</button>
+                </form>
+                <form action="{{ path('app_delete_account') }}" method="post">
+                    <button type="submit">Usuń konto</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
