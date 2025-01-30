@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Wiedmolol{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+</head>
+<header>
+    <div class="header-left">
+        <a href="{{ path('homepage') }}"><img src="{{ asset('img/logo.svg') }}" alt="Logo" class="logo"></a>
+        <h1 class="site-name">Wiedmolol</h1>
+    </div>
+    <div class="header-right"></div>
+</header>
+<body>
+{% block content %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,25 @@
+{% extends 'security/auth_base.html.twig' %}
+
+{% block title %}Logowanie - Wiedmolol{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <form method="post" class="login-form">
+            {% for message in app.flashes('error') %}
+                <p class="error-message">{{ message }}</p>
+            {% endfor %}
+
+            <input type="email" id="email" name="_username" placeholder="E-mail" required>
+            <input type="password" id="password" name="_password" placeholder="Hasło" required>
+
+            <button type="submit" name="logIn">Zaloguj się</button>
+        </form>
+    </div>
+
+    <div class="signup-bar">
+        <p>Nie masz konta?</p>
+        <a href="{{ path('app_register') }}">
+            <button name="signUp">Zarejestruj się</button>
+        </a>
+    </div>
+{% endblock %}
